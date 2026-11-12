@@ -1,0 +1,560 @@
+/* ================================
+   INVENTORY PAGE
+================================ */
+
+.inventory-page {
+  padding: 38px 36px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.inventory-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.inventory-header p {
+  font-size: 17px;
+  color: #64748b;
+}
+
+
+/* ================================
+   TOP ACTIONS
+================================ */
+
+.inventory-actions-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.product-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: white;
+
+  padding: 13px 18px;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  color: #1e293b;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.add-product-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  background: #2563eb;
+
+  color: white;
+
+  border: none;
+
+  padding: 14px 22px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.add-product-btn:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-2px);
+}
+
+
+/* ================================
+   SEARCH BAR
+================================ */
+
+.search-container {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  width: 450px;
+
+  background: white;
+
+  border: 2px solid #cbd5e1;
+
+  padding: 14px 18px;
+
+  border-radius: 12px;
+
+  margin-bottom: 25px;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.08);
+
+  transition: 0.25s;
+}
+
+.search-container:focus-within {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 5px 20px rgba(37, 99, 235, 0.2);
+}
+
+.search-container svg {
+  color: #2563eb;
+
+  flex-shrink: 0;
+}
+
+.search-container input {
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  font-size: 16px;
+
+  color: #1e293b;
+
+  background: transparent;
+}
+
+.search-container input::placeholder {
+  color: #94a3b8;
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
+.inventory-table-container {
+  background: white;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.inventory-table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.inventory-table thead {
+  background: #f8fafc;
+}
+
+.inventory-table th {
+  padding: 20px 18px;
+
+  text-align: left;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: #475569;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.inventory-table td {
+  padding: 20px 18px;
+
+  font-size: 16px;
+
+  color: #334155;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.inventory-table tbody tr {
+  transition: 0.2s;
+}
+
+.inventory-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.inventory-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.product-name {
+  font-weight: 600;
+
+  color: #1e293b;
+}
+
+
+/* ================================
+   STATUS BADGES
+================================ */
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 8px 14px;
+
+  border-radius: 20px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  min-width: 105px;
+}
+
+
+/* HEALTHY GREEN */
+
+.status-badge.healthy {
+  background: #dcfce7;
+
+  color: #15803d;
+
+  border: 1px solid #86efac;
+}
+
+
+/* LOW STOCK RED */
+
+.status-badge.low-stock {
+  background: #fee2e2;
+
+  color: #dc2626;
+
+  border: 1px solid #fca5a5;
+}
+
+
+/* ================================
+   ACTION BUTTONS
+================================ */
+
+.action-buttons {
+  display: flex;
+
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+/* EDIT */
+
+.edit-btn {
+  background: #dbeafe;
+
+  color: #2563eb;
+}
+
+.edit-btn:hover {
+  background: #2563eb;
+
+  color: white;
+
+  transform: translateY(-2px);
+}
+
+
+/* DELETE */
+
+.delete-btn {
+  background: #fee2e2;
+
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+
+  color: white;
+
+  transform: translateY(-2px);
+}
+
+
+/* ================================
+   NO PRODUCTS
+================================ */
+
+.no-products {
+  text-align: center;
+
+  padding: 40px !important;
+
+  color: #94a3b8;
+
+  font-size: 17px;
+}
+
+
+/* ================================
+   MODAL
+================================ */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(15, 23, 42, 0.55);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  z-index: 1000;
+
+  backdrop-filter: blur(3px);
+}
+
+.product-modal {
+  width: 620px;
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 36px;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ================================
+   MODAL HEADER
+================================ */
+
+.modal-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 28px;
+}
+
+.modal-header h2 {
+  font-size: 30px;
+
+  color: #1e293b;
+}
+
+.close-btn {
+  background: transparent;
+
+  border: none;
+
+  color: #64748b;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: #dc2626;
+
+  transform: rotate(90deg);
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 7px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  color: #475569;
+}
+
+.form-group input {
+  padding: 13px 15px;
+
+  border: 1.5px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group input:disabled {
+  background: #f1f5f9;
+
+  cursor: not-allowed;
+}
+
+
+/* ================================
+   MODAL BUTTONS
+================================ */
+
+.modal-buttons {
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 13px 24px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  border: none;
+
+  transition: 0.2s;
+}
+
+.cancel-btn {
+  background: #e2e8f0;
+
+  color: #334155;
+}
+
+.cancel-btn:hover {
+  background: #cbd5e1;
+}
+
+.submit-btn {
+  background: #2563eb;
+
+  color: white;
+}
+
+.submit-btn:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-2px);
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+  .inventory-header {
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+  .inventory-actions-top {
+    width: 100%;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .inventory-table-container {
+    overflow-x: auto;
+  }
+
+}
