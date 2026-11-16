@@ -1,19 +1,16 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from database.mongodb import db
 
-
 product_bp = Blueprint("products", __name__)
-
 
 # =====================================
 # ADD PRODUCT
 # =====================================
-
 @product_bp.route("/products", methods=["POST"])
 @jwt_required()
 def add_product():
-
+    admin_id = get_jwt_identity()
     data = request.get_json()
 
     required_fields = [
@@ -33,16 +30,18 @@ def add_product():
             }), 400
 
     existing_product = db.products.find_one({
-        "sku": data["sku"]
+        "sku": data["sku"],
+        "admin_id": admin_id
     })
 
     if existing_product:
         return jsonify({
             "status": "error",
-            "message": "Product with this SKU already exists"
+            "message": "Product with this SKU already exists in your inventory"
         }), 409
 
     product = {
+        "admin_id": admin_id,
         "product_name": data["product_name"],
         "category": data["category"],
         "sku": data["sku"],
@@ -63,17 +62,14 @@ def add_product():
 # =====================================
 # GET ALL PRODUCTS
 # =====================================
-
 @product_bp.route("/products", methods=["GET"])
 @jwt_required()
 def get_products():
-
+    admin_id = get_jwt_identity()
     products = []
 
-    for product in db.products.find():
-
+    for product in db.products.find({"admin_id": admin_id}):
         product["_id"] = str(product["_id"])
-
         products.append(product)
 
     return jsonify({
@@ -86,13 +82,13 @@ def get_products():
 # =====================================
 # GET SINGLE PRODUCT
 # =====================================
-
 @product_bp.route("/products/<sku>", methods=["GET"])
 @jwt_required()
 def get_product(sku):
-
+    admin_id = get_jwt_identity()
     product = db.products.find_one({
-        "sku": sku
+        "sku": sku,
+        "admin_id": admin_id
     })
 
     if not product:
@@ -112,15 +108,15 @@ def get_product(sku):
 # =====================================
 # UPDATE PRODUCT
 # =====================================
-
 @product_bp.route("/products/<sku>", methods=["PUT"])
 @jwt_required()
 def update_product(sku):
-
+    admin_id = get_jwt_identity()
     data = request.get_json()
 
     product = db.products.find_one({
-        "sku": sku
+        "sku": sku,
+        "admin_id": admin_id
     })
 
     if not product:
@@ -130,7 +126,6 @@ def update_product(sku):
         }), 404
 
     update_data = {}
-
     allowed_fields = [
         "product_name",
         "category",
@@ -140,27 +135,22 @@ def update_product(sku):
     ]
 
     for field in allowed_fields:
-
         if field in data:
-
             if field == "price":
                 update_data[field] = float(data[field])
-
             elif field in ["quantity", "reorder_level"]:
                 update_data[field] = int(data[field])
-
             else:
                 update_data[field] = data[field]
 
     if not update_data:
-
         return jsonify({
             "status": "error",
             "message": "No valid fields provided for update"
         }), 400
 
     db.products.update_one(
-        {"sku": sku},
+        {"sku": sku, "admin_id": admin_id},
         {"$set": update_data}
     )
 
@@ -173,17 +163,17 @@ def update_product(sku):
 # =====================================
 # DELETE PRODUCT
 # =====================================
-
 @product_bp.route("/products/<sku>", methods=["DELETE"])
 @jwt_required()
 def delete_product(sku):
+    admin_id = get_jwt_identity()
 
     result = db.products.delete_one({
-        "sku": sku
+        "sku": sku,
+        "admin_id": admin_id
     })
 
     if result.deleted_count == 0:
-
         return jsonify({
             "status": "error",
             "message": "Product not found"
